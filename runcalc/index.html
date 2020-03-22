@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US" ><head>
+
+<title>Running Pace Calculator</title>
+
+	</head>
+
+<body>
+        
+    
+    <form id="calcForm">
+		<fieldset id="calculate">
+			<legend>Calculate Pace</legend>
+			<div id="distance-input">
+				<label for="distance">Distance:</label>
+				<button id="calc-distance">=</button>
+				<input id="distance" type="text" size="7">
+				<select id="race-type">
+					<option value="">Race Type</option>
+					<option value="26.219M">Marathon</option>
+					<option value="13.109M">Half-Mara</option>
+					<option value="5K">5K</option>
+					<option value="10K">10K</option>
+					<option value="10M">10M</option>
+					<option value="50K">50K</option>
+					<option value="50M">50M</option>
+					<option value="100K">100K</option>
+					<option value="100M">100M</option>
+				</select>
+			</div>
+			<div id="pace-input">
+				<label for="pace-minutes">Pace:</label>
+				<button id="calc-pace">=</button>
+				<input id="pace-minutes" type="text" size="2" placeholder="MM">
+				<input id="pace-seconds" type="text" size="2" placeholder="SS">
+				<input type="radio" id="mile" name="unit" value="mile" checked="">
+				<label class="units" for="mile">Mile</label>
+				<input type="radio" id="km" name="unit" value="km">
+				<label class="units" for="km">Km</label>
+			</div>
+			<div id="time-input">
+				<label for="hours">Time:</label>
+				<button id="calc-time">=</button>
+				<input id="hours" type="text" size="2" placeholder="HH">
+				<input id="minutes" type="text" size="2" placeholder="MM">
+				<input id="seconds" type="text" size="2" placeholder="SS">
+			</div>
+	<!-- div id="choose-method">
+		<button type="button" id="pace-button" title="Click to calculate pace based on time and distance.">Pace</button>&nbsp;
+		<button type="button" id="distance-button" title="Click to calculate distance based on time and pace.">Distance</button>&nbsp;
+		<button type="button" id="time-button" title="Click to calculate time based on pace and distance.">Time</button>
+	</div -->
+		</fieldset>
+	</form>
+    
+        
+<link rel="stylesheet" id="running-calculator-css" href="runcalc-style.css" type="text/css" media="screen">
+<script type="text/javascript" src="runcalc-script.js"></script>
+
+
+</html>
