@@ -24,7 +24,7 @@ Marathon distance: 42.195 kilometres or 26.219 mi - Wikipedia
 			const which = calcWhich.split('-')[1];
 			const time = theForm['hours'].value + ':' + theForm['minutes'].value + ':' + theForm['minutes'].value;
 			const pace = theForm['pace-minutes'].value + ':' + theForm['pace-seconds'].value;
-			const distance = parseInt(theForm['distance'].value);
+			const distance = parseFloat(theForm['distance'].value);
 			/*
 			 user indicates Km or Miles for distance and pace
 			 if units match, unitFactor = 1
