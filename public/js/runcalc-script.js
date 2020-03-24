@@ -1,3 +1,4 @@
+
 /*
 Calculate marathon running pace or time given a pace or distance given pace and time.
 TODO: add abillity to deal with different distance units, choose race types, metric/imperial units and conversions
@@ -19,27 +20,42 @@ Marathon distance: 42.195 kilometres or 26.219 mi - Wikipedia
 	// use radios.value and change event to read the user choice
 	// console.log({radios});
 		const theForm = document.getElementById('calcForm');
-		const unitFactor = new Array(2);
-		unitFactor['m'] = 1.60934;
-		unitFactor['k'] = 0.621371;
+		let unitFactor = 1;
 		function calculate(calcWhich) {
 			const which = calcWhich.split('-')[1];
 			const time = theForm['hours'].value + ':' + theForm['minutes'].value + ':' + theForm['minutes'].value;
 			const pace = theForm['pace-minutes'].value + ':' + theForm['pace-seconds'].value;
+			const distance = parseFloat(theForm['distance'].value);
+			/*
+			 user indicates Km or Miles for distance and pace
+			 if units match, unitFactor = 1
+			 else if distance in Km and pace in miles
+			 		unitFactor = 0.62150404
+			 else if distance in miles and pace in Km
+			 		unitFactor = 1.609
+			*/
 			const regex = /[K|M]/gi;
 			const distanceUnit = theForm['distance'].value.match(regex)[0].toLowerCase();
-			const paceUnit = theForm['unit'];
-			console.log(unitFactor[distanceUnit], {paceUnit});
+			const paceUnit = theForm['unit'].value;
+			if( distanceUnit === paceUnit ) {
+				unitFactor = 1;
+			}
+			else if( distanceUnit ==='k' ) {
+				unitFactor = 0.62150404
+			}
+			else {
+				unitFactor = 1.609
+			}
+			console.log({unitFactor});
 			// TODO: validate unit - must be 'K' for kilometers or 'M' for miles. case insensitive.
-			const distance = parseInt(theForm['distance'].value);
 			switch(which) {
 				case 'pace':
-					[hours, minutes, seconds] = new Date((toSeconds(time) / distance) * 1000).toISOString().substring(11, 19).replace(/^0+/, '').split(':');
+					[hours, minutes, seconds] = new Date((toSeconds(time) / distance) * 1000 * unitFactor).toISOString().substring(11, 19).replace(/^0+/, '').split(':');
 					theForm['pace-minutes'].value = minutes;
 					theForm['pace-seconds'].value = seconds;
 					break;
 				case 'time':
-					[hours, minutes, seconds] = new Date((toSeconds(pace) * distance) * 1000).toISOString().substring(11, 19).replace(/^0+/, '').split(':');
+					[hours, minutes, seconds] = new Date((toSeconds(pace) * distance) * 1000 * unitFactor).toISOString().substring(11, 19).replace(/^0+/, '').split(':');
 					theForm['hours'].value = hours;
 					theForm['minutes'].value  = minutes;
 					theForm['seconds'].value = seconds;
