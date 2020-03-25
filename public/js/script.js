@@ -3,9 +3,10 @@
 Calculate marathon running pace or time given a pace or distance given pace and time.
 TODO: add abillity to deal with different distance units, choose race types, metric/imperial units and conversions
 
+file:///Users/francismaile/www/wordpress/wp-content/plugins/running-calculator/runcalc/coolrunning/index.html
 https://www.hillrunner.com/calculators/suggested-training-paces/
-http://www.coolrunning.com/engine/4/4_1/96.shtml
 Marathon distance: 42.195 kilometres or 26.219 mi - Wikipedia
+
 */
 
 (	function () {
@@ -25,7 +26,22 @@ Marathon distance: 42.195 kilometres or 26.219 mi - Wikipedia
 			const which = calcWhich.split('-')[1];
 			const time = theForm['hours'].value + ':' + theForm['minutes'].value + ':' + theForm['minutes'].value;
 			const pace = theForm['pace-minutes'].value + ':' + theForm['pace-seconds'].value;
+			const paceUnit = theForm['unit'].value;
 			const distance = parseFloat(theForm['distance'].value);
+			try {
+				var distanceUnit = theForm['distance'].value.match(/[K|M]/i)[0].toLowerCase();
+			}
+			catch(error) {
+				alert("You must indicate a distance unit of either \"K\" or \"M\" (kilometers or miles)");
+				theForm['distance'].classList.add("correctError");
+				theForm['distance'].focus();
+				/* place the cursor at the end of the text in the distance field */
+				const temp = theForm['distance'].value ;
+				theForm['distance'].value = '';
+				theForm['distance'].value = temp;
+				window.setTimeout( nothing => theForm['distance'].classList.remove("correctError"), 10000);
+				return false;
+			}
 			/*
 			 user indicates Km or Miles for distance and pace
 			 if units match, unitFactor = 1
@@ -34,9 +50,6 @@ Marathon distance: 42.195 kilometres or 26.219 mi - Wikipedia
 			 else if distance in miles and pace in Km
 			 		unitFactor = 1.609
 			*/
-			const regex = /[K|M]/gi;
-			const distanceUnit = theForm['distance'].value.match(regex)[0].toLowerCase();
-			const paceUnit = theForm['unit'].value;
 			if( distanceUnit === paceUnit ) {
 				unitFactor = 1;
 			}

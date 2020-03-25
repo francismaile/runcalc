@@ -44,9 +44,9 @@ class WP_RunCalc_Widget extends WP_Widget {
  
     public function widget( $args, $instance ) {
  
-		wp_enqueue_style( 'running-calculator', plugin_dir_url(  __FILE__  ) . 'public/css/runcalc-style.css', array(), null, 'screen' );
+		wp_enqueue_style( 'running-calculator', plugin_dir_url(  __FILE__  ) . 'public/css/styles.css', array(), null, 'screen' );
 		
-		wp_enqueue_script( 'WP_RunCalc_Widget', plugin_dir_url(  __FILE__  ) . 'public/js/runcalc-script.js', array(), null, true );
+		wp_enqueue_script( 'WP_RunCalc_Widget', plugin_dir_url(  __FILE__  ) . 'public/js/script.js', array(), null, true );
  
 print <<<END
 <form id="calcForm">
@@ -55,7 +55,7 @@ print <<<END
 			<div id="distance-input">
 				<label for="distance">Distance:</label>
 				<button id="calc-distance">=</button>
-				<input id="distance" type="text" size="7" >
+				<input id="distance" type="text" size="7" value="26.219">
 				<select id="race-type">
 					<option value="">Race Type</option>
 					<option value="26.219M">Marathon</option>
@@ -72,11 +72,11 @@ print <<<END
 			<div id="pace-input">
 				<label for="pace-minutes">Pace:</label>
 				<button id="calc-pace">=</button>
-				<input id="pace-minutes" type="text" size="2" placeholder="MM" >
+				<input id="pace-minutes" type="text" size="2" placeholder="MM" value="10" >
 				<input id="pace-seconds" type="text" size="2" placeholder="SS" >
-				<input type="radio" id="mile" name="unit" value="mile" checked>
+				<input type="radio" id="mile" name="unit" value="m" checked>
 				<label class="units" for="mile">Mile</label>
-				<input type="radio" id="km" name="unit" value="km">
+				<input type="radio" id="km" name="unit" value="k">
 				<label class="units" for="km">Km</label>
 			</div>
 			<div id="time-input">

@@ -58,6 +58,22 @@ and children with display:inline or inline-block.
 	text-align: center;
 }
 
+#calcForm #distance.correctError {
+	animation-duration: 1.5s;
+	animation-name: flashError;
+	animation-iteration-count: 3;
+}
+
+@keyframes flashError {
+	from {
+		outline: solid blue;
+	}
+
+	to {
+		outline: none;
+	}
+}
+
 #calcForm #execCalc {
 	display: inline-block;
 	vertical-align: top;
